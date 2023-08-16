@@ -1,8 +1,6 @@
 # ----------------------------------------------------------------------
 # Imports
 # ----------------------------------------------------------------------
-import os
-import pickle
 from google_auth_oauthlib.flow import Flow, InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -34,6 +32,7 @@ print(API_SERVICE_NAME, 'Service Created Successfully!')
 
 # Create a csv file to hold the output
 outFile = open("out.csv", "w")
+outFile.writelines("filename,mimeType,creationTime")
 
 # List all media item names
 count = 0
