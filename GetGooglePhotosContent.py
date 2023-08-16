@@ -36,15 +36,17 @@ print(API_SERVICE_NAME, 'Service Created Successfully!')
 outFile = open("out.csv", "w")
 
 # List all media item names
+count = 0
 nextpagetoken = 'Dummy'
 while nextpagetoken != '':
     nextpagetoken = '' if nextpagetoken == 'Dummy' else nextpagetoken
-    results = google_photos.mediaItems().search(body={"pageSize": 100, "pageToken": nextpagetoken}).execute()
+    results = google_photos.mediaItems().search(body={"pageSize": 10, "pageToken": nextpagetoken}).execute()
     items = results.get('mediaItems', [])
     nextpagetoken = results.get('nextPageToken', '')
     for item in items:
         fileString = str(item['filename']) + "," + str(item['mimeType']) + "," + str(item['mediaMetadata']['creationTime'])
         outFile.writelines(fileString + '\n')
-        print(fileString)
+        count = count + 1
+        print(str(count) + " / " + fileString)
 
 
